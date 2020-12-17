@@ -1,4 +1,5 @@
 import sys
+import time
 
 def flatten(li):
   return sum(([x] if not isinstance(x, list) else flatten(x) for x in li), [])
@@ -64,5 +65,9 @@ def M2(puzzle):
   print(sum(mem1.values()), sum(mem2.values()))
 
 puzzle = [line.strip() for line in open(sys.argv[1], 'r')]
+starttime = time.time()
 M1(puzzle)
+print('M1 took {} seconds'.format(time.time() - starttime))
+starttime = time.time()
 M2(puzzle)
+print('M2 took {} seconds'.format(time.time() - starttime))
