@@ -19,11 +19,11 @@ def M1(puzzle, N = 2020):
   print(puzzle[-1])
 
 puzzle = [int(x.strip()) for line in open(sys.argv[1], 'r') for x in line.split(",")]
-#M1([0,3,6], N = int(sys.argv[2]))
-#M1([1,3,2], N = int(sys.argv[2]))
-#M1([2,1,3], N = int(sys.argv[2]))
-#M1([1,2,3], N = int(sys.argv[2]))
-#M1([2,3,1], N = int(sys.argv[2]))
+M1([0,3,6], N = int(sys.argv[2]))
+M1([1,3,2], N = int(sys.argv[2]))
+M1([2,1,3], N = int(sys.argv[2]))
+M1([1,2,3], N = int(sys.argv[2]))
+M1([2,3,1], N = int(sys.argv[2]))
 M1([3,2,1], N = int(sys.argv[2]))
-#M1([3,1,2], N = int(sys.argv[2]))
-#M1(puzzle, N = int(sys.argv[2]))
+M1([3,1,2], N = int(sys.argv[2]))
+M1(puzzle, N = int(sys.argv[2]))
