@@ -37,10 +37,16 @@ puzzle = [line.strip() for line in open(sys.argv[1], 'r')]
 operator_num = {'+':2, '-':2, '*':2, '/':2}
 y = 0
 for exp in puzzle:
-  y += calculator_function(post_fix(exp.strip()))
+  x = post_fix(exp.strip())
+  n = calculator_function(x)
+  print("{} -> {} = {}".format(exp.strip(), x, n))
+  y += n
 print("sum: {}".format(y))
 operator_num = {'+':2, '-':2, '*':1, '/':1}
 y = 0
 for exp in puzzle:
-  y += calculator_function(post_fix(exp.strip()))
+  x = post_fix(exp.strip())
+  n = calculator_function(x)
+  print("{} -> {} = {}".format(exp.strip(), x, n))
+  y += n
 print("sum: {}".format(y))
