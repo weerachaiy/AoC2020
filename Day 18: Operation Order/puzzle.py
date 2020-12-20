@@ -1,6 +1,6 @@
 import sys
 
-def post_fix(args):
+def post_fix(args, operator_num):
   stack = []
   postfix = ''
   for ch in args.replace(" ",""):
@@ -32,21 +32,16 @@ def calculator_function(args):
       stack.append(c)
   return stack[-1]
 
-operator = set(['+', '-', '*', '/', '(', ')'])
+def M1(puzzle, operator_num):
+  y = 0
+  for exp in puzzle:
+    x = post_fix(exp.strip(), operator_num)
+    n = calculator_function(x)
+    print("{} -> {} = {}".format(exp.strip(), x, n))
+    y += n
+  print("sum: {}".format(y))
+
 puzzle = [line.strip() for line in open(sys.argv[1], 'r')]
-operator_num = {'+':2, '-':2, '*':2, '/':2}
-y = 0
-for exp in puzzle:
-  x = post_fix(exp.strip())
-  n = calculator_function(x)
-  print("{} -> {} = {}".format(exp.strip(), x, n))
-  y += n
-print("sum: {}".format(y))
-operator_num = {'+':2, '-':2, '*':1, '/':1}
-y = 0
-for exp in puzzle:
-  x = post_fix(exp.strip())
-  n = calculator_function(x)
-  print("{} -> {} = {}".format(exp.strip(), x, n))
-  y += n
-print("sum: {}".format(y))
+operator = set(['+', '-', '*', '/', '(', ')'])
+M1(puzzle, {'+':2, '-':2, '*':2, '/':2})
+M1(puzzle, {'+':2, '-':2, '*':1, '/':1})
