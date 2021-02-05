@@ -1,0 +1,55 @@
+import sys
+from functools import reduce
+import re
+
+counter1 = counter2 = 0
+HeightUnits = ['cm', 'in']
+EyeColors = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
+SetA = set(['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'])
+file = open(sys.argv[1]).read().split("\n\n")
+#print(sum([len(reduce(lambda x,y: x|y, [set(x) for x in line.split("\n")])) for line in file]))
+#print(sum([len(reduce(lambda x,y: x&y, [set(x) for x in line.split("\n")])) for line in file]))
+for line in file:
+  for x in line.replace("\n", " ").split("\n"):
+    SetB = set(dict([y.split(":") for y in x.split()]).keys())
+    DictA = dict([y.split(":") for y in x.split()])
+    if len(SetA & SetB) >= 7:
+      counter1 += 1
+      BirthYear = int(DictA['byr'])
+      if (1920 > BirthYear > 2002):
+        print('byr', BirthYear)
+        break;
+      IssueYear = int(DictA['iyr'])
+      if (2010 > IssueYear > 2020):
+        print('iyr', IssueYear)
+        break;
+      ExpirationYear = int(DictA['eyr'])
+      if (2020 > ExpirationYear > 2030):
+        print('eyr', ExpirationYear)
+        break;
+      HeightUnit = DictA['hgt'][-2:]
+      if not HeightUnit in HeightUnits:
+        print('hgt', DictA['hgt'])
+        break;
+      Height = int(DictA['hgt'][:-2])
+      if (HeightUnit == "cm" and (150 > Height > 193)):
+        print('hgt', Height, HeightUnit)
+        break;
+      if (HeightUnit == "in" and (59 > Height > 76)):
+        print('hgt', Height, HeightUnit)
+        break;
+      HairColor = DictA['hcl']
+      if len(re.findall(r"#(?:[a-fA-F0-9]{6})\b", HairColor)) < 1:
+        print("hcl", HairColor)
+        break;
+      EyeColor = DictA['ecl']
+      if not EyeColor in EyeColors:
+        print('ecl', EyeColor)
+        break;
+      PassportID = DictA['pid']
+      if len(re.findall(r"0(?:[0-9]{8})\b", PassportID)) < 1:
+        print("pid", PassportID)
+        break;
+      counter2 += 1
+      print(sorted(DictA))
+print(counter1, counter2)

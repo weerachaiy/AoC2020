@@ -1,0 +1,8 @@
+import sys
+from functools import reduce
+
+Answer = -1
+with open(sys.argv[1]) as file:
+  z = [len(reduce(lambda x,y: x&y, [set(x) for x in line.split(",")])) for line in file]
+    Answer += z
+print(Answer)
